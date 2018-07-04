@@ -1,0 +1,40 @@
+buildscript {
+    ext.kotlin_version = '1.2.51'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    version = '0.0.1'
+    group = 'com.greyrocksoft.hak'
+}
+
+subprojects {
+    apply plugin: "kotlin"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    }
+
+    kotlin {
+        experimental {
+            coroutines 'enable'
+        }
+    }
+}
+
+project(':http-async-kt-core') {
+    dependencies {
+        compile project(':http-async-kt-api')
+    }
+}
